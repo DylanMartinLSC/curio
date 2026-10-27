@@ -1,7 +1,6 @@
 """Generate two small, entirely fictional demo packs (coins and stamps) so Curio runs out of the box.
 
-The images are procedurally drawn and the prices are invented; they exist to exercise the engine
-and show the pack format, not to value anything real.
+The images are procedurally drawn; they exist to exercise the engine and show the pack format.
 
     python scripts/make_demo_packs.py [out_dir]   # default: ./packs
 """
@@ -17,11 +16,6 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 METALS = {"copper": (184, 115, 51), "silver": (192, 192, 196), "gold": (212, 175, 55), "nickel": (160, 165, 160)}
-SHELDON = ["G-4", "VG-8", "F-12", "VF-20", "EF-40", "AU-50", "MS-60", "MS-63", "MS-65"]
-SHELDON_MULT = {"G-4": 0.35, "VG-8": 0.45, "F-12": 0.6, "VF-20": 0.8, "EF-40": 1.0, "AU-50": 1.25,
-                "MS-60": 1.6, "MS-63": 2.3, "MS-65": 4.0}
-STAMP_GRADES = ["Fair", "Good", "Fine", "Very Fine", "Extremely Fine", "Superb"]
-STAMP_MULT = {"Fair": 0.15, "Good": 0.3, "Fine": 0.6, "Very Fine": 1.0, "Extremely Fine": 1.6, "Superb": 3.0}
 
 
 def font(size):
@@ -87,7 +81,6 @@ def coin_face(metal, motif, text, year, side, seed):
 
 
 def stamp(color, motif, value, seed):
-    rnd = random.Random(seed)
     W, H = 400, 480
     img = Image.new("RGB", (W + 60, H + 60), (238, 236, 230))
     d = ImageDraw.Draw(img)
@@ -123,45 +116,25 @@ def stamp(color, motif, value, seed):
         d.polygon([(cx - 110, cy + 60), (cx - 110, cy - 60), (cx - 55, cy), (cx, cy - 90), (cx + 55, cy), (cx + 110, cy - 60), (cx + 110, cy + 60)], fill=inner)
     d.text((cx, y0 + H - 70), value, font=font(54), fill=inner, anchor="mm")
     d.text((cx, y0 + 60), "EXAMPLIA", font=font(30), fill=inner, anchor="mm")
-    del rnd
     return img
 
 
-def prices(rnd, base, grades, n=7, guide=True):
-    out = []
-    for _ in range(n):
-        g = rnd.choice(grades[2:])
-        mult = (SHELDON_MULT if grades is SHELDON else STAMP_MULT)[g]
-        y, m = rnd.choice([2023, 2024, 2025, 2026]), rnd.randint(1, 12)
-        if y == 2026:
-            m = min(m, 9)
-        out.append({"value": round(base * mult * rnd.uniform(0.85, 1.18), 2), "grade": g, "date": f"{y}-{m:02d}-15",
-                    "source": f"Demo auction #{rnd.randint(100, 999)} (fictional)", "kind": "sale"})
-    if guide:
-        out.append({"value": round(base * 1.1, 2), "grade": grades[4], "date": "2025-01-01",
-                    "source": "Demo price guide 2025 (fictional)", "kind": "guide"})
-    out.append({"value": round(base * 1.4, 2), "grade": grades[4], "date": "2026-08-01",
-                "source": "Demo dealer listing (fictional)", "kind": "ask"})
-    return out
-
-
 def make_coins(root: Path):
-    rnd = random.Random(7)
     (root / "images").mkdir(parents=True, exist_ok=True)
     designs = [
-        ("1-cent-1921", "1 Cent 1921", "copper", {"kind": "head", "n": 0, "wreath": 6}, "1", 1921, 0.8),
-        ("1-cent-1938", "1 Cent 1938", "copper", {"kind": "head", "n": 0, "wreath": 6}, "1", 1938, 0.4),
-        ("5-cent-1921", "5 Cents 1921", "nickel", {"kind": "star", "n": 5, "wreath": 4}, "5", 1921, 2.5),
-        ("5-cent-1950", "5 Cents 1950 (6-point star)", "nickel", {"kind": "star", "n": 6, "wreath": 4}, "5", 1950, 1.2),
-        ("10-cent-1905", "10 Cents 1905", "silver", {"kind": "rings", "n": 22, "wreath": 8}, "10", 1905, 9.0),
-        ("10-cent-1960", "10 Cents 1960", "silver", {"kind": "polygon", "n": 8, "wreath": 8}, "10", 1960, 3.5),
-        ("25-cent-1912", "25 Cents 1912", "silver", {"kind": "cross", "n": 0, "wreath": 10}, "25", 1912, 14.0),
-        ("50-cent-1899", "50 Cents 1899", "silver", {"kind": "polygon", "n": 5, "wreath": 12}, "50", 1899, 45.0),
-        ("1-crown-1888", "1 Crown 1888", "gold", {"kind": "head", "n": 0, "wreath": 14}, "1C", 1888, 420.0),
-        ("2-crown-1901", "2 Crowns 1901", "gold", {"kind": "star", "n": 8, "wreath": 14}, "2C", 1901, 760.0),
+        ("1-cent-1921", "1 Cent 1921", "copper", {"kind": "head", "n": 0, "wreath": 6}, "1", 1921),
+        ("1-cent-1938", "1 Cent 1938", "copper", {"kind": "head", "n": 0, "wreath": 6}, "1", 1938),
+        ("5-cent-1921", "5 Cents 1921", "nickel", {"kind": "star", "n": 5, "wreath": 4}, "5", 1921),
+        ("5-cent-1950", "5 Cents 1950 (6-point star)", "nickel", {"kind": "star", "n": 6, "wreath": 4}, "5", 1950),
+        ("10-cent-1905", "10 Cents 1905", "silver", {"kind": "rings", "n": 22, "wreath": 8}, "10", 1905),
+        ("10-cent-1960", "10 Cents 1960", "silver", {"kind": "polygon", "n": 8, "wreath": 8}, "10", 1960),
+        ("25-cent-1912", "25 Cents 1912", "silver", {"kind": "cross", "n": 0, "wreath": 10}, "25", 1912),
+        ("50-cent-1899", "50 Cents 1899", "silver", {"kind": "polygon", "n": 5, "wreath": 12}, "50", 1899),
+        ("1-crown-1888", "1 Crown 1888", "gold", {"kind": "head", "n": 0, "wreath": 14}, "1C", 1888),
+        ("2-crown-1901", "2 Crowns 1901", "gold", {"kind": "star", "n": 8, "wreath": 14}, "2C", 1901),
     ]
     items = []
-    for i, (cid, title, metal, motif, text, year, base) in enumerate(designs):
+    for i, (cid, title, metal, motif, text, year) in enumerate(designs):
         imgs = []
         for side in ("obverse", "reverse"):
             p = f"images/{cid}-{side}.jpg"
@@ -170,44 +143,37 @@ def make_coins(root: Path):
         items.append({"id": cid, "title": f"Examplia {title}",
                       "attributes": {"country": "Examplia (fictional)", "denomination": title.split(" (")[0].rsplit(" ", 1)[0],
                                      "year": year, "composition": metal},
-                      "images": imgs, "prices": prices(rnd, base, SHELDON)})
-    items[-1]["prices"] = items[-1]["prices"][:2]  # a thinly traded item, to show low confidence
-    items[1]["prices"].append({"value": 95.0, "grade": "VF-20", "date": "2025-06-15",
-                               "source": "Demo online sale (fictional, likely mis-described)", "kind": "sale"})
+                      "images": imgs})
     write_pack(root, {
         "id": "demo-coins", "name": "Demo: coins of Examplia", "domain": "coin", "version": "1.0.0",
-        "license": "CC0-1.0", "currency": "USD", "rotation_invariant": True,
-        "description": "Fictional coins with invented prices, for trying Curio.",
+        "license": "CC0-1.0", "rotation_invariant": True,
+        "description": "Fictional coins, for trying Curio.",
         "maintainers": ["curio project"],
-        "grades": {"scale": "Sheldon", "order": SHELDON, "multipliers": SHELDON_MULT},
     }, items)
 
 
 def make_stamps(root: Path):
-    rnd = random.Random(11)
     (root / "images").mkdir(parents=True, exist_ok=True)
     designs = [
-        ("ship-5c-blue", "5c Sailing Ship, blue", (40, 70, 140), "ship", "5c", 1.5),
-        ("ship-5c-red", "5c Sailing Ship, red (color error)", (170, 40, 40), "ship", "5c", 220.0),
-        ("bird-10c", "10c Kingfisher", (30, 120, 110), "bird", "10c", 3.0),
-        ("mountain-20c", "20c Summit", (90, 60, 120), "mountain", "20c", 6.0),
-        ("flower-1c", "1c Wildflower", (190, 120, 30), "flower", "1c", 0.4),
-        ("crown-1d", "1d Coronation", (120, 30, 60), "crown", "1d", 38.0),
+        ("ship-5c-blue", "5c Sailing Ship, blue", (40, 70, 140), "ship", "5c"),
+        ("ship-5c-red", "5c Sailing Ship, red (color error)", (170, 40, 40), "ship", "5c"),
+        ("bird-10c", "10c Kingfisher", (30, 120, 110), "bird", "10c"),
+        ("mountain-20c", "20c Summit", (90, 60, 120), "mountain", "20c"),
+        ("flower-1c", "1c Wildflower", (190, 120, 30), "flower", "1c"),
+        ("crown-1d", "1d Coronation", (120, 30, 60), "crown", "1d"),
     ]
     items = []
-    for i, (sid, title, color, motif, value, base) in enumerate(designs):
+    for i, (sid, title, color, motif, value) in enumerate(designs):
         p = f"images/{sid}.jpg"
         stamp(color, motif, value, i).save(root / p, quality=92)
         items.append({"id": sid, "title": f"Examplia {title}",
                       "attributes": {"country": "Examplia (fictional)", "face_value": value, "color": title.split(", ")[-1] if ", " in title else ""},
-                      "images": [{"path": p, "side": "front", "license": "CC0-1.0", "source": "procedurally generated"}],
-                      "prices": prices(rnd, base, STAMP_GRADES)})
+                      "images": [{"path": p, "side": "front", "license": "CC0-1.0", "source": "procedurally generated"}]})
     write_pack(root, {
         "id": "demo-stamps", "name": "Demo: stamps of Examplia", "domain": "stamp", "version": "1.0.0",
-        "license": "CC0-1.0", "currency": "USD", "rotation_invariant": False,
-        "description": "Fictional stamps with invented prices, for trying Curio.",
+        "license": "CC0-1.0", "rotation_invariant": False,
+        "description": "Fictional stamps, for trying Curio.",
         "maintainers": ["curio project"],
-        "grades": {"scale": "centering", "order": STAMP_GRADES, "multipliers": STAMP_MULT},
     }, items)
 
 

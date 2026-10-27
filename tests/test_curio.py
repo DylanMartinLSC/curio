@@ -4,7 +4,6 @@ import json
 import random
 import shutil
 import sys
-from datetime import date
 from pathlib import Path
 
 import pytest
@@ -13,7 +12,6 @@ from PIL import Image
 from curio.engine import Curio
 from curio.evaluate import simulate_photo
 from curio.pack import PackError, load_pack
-from curio.valuation import estimate_value
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -37,7 +35,18 @@ def engine(packs_dir, tmp_path):
 def test_packs_load(packs_dir):
     coins = load_pack(packs_dir / "demo-coins")
     assert coins.domain == "coin" and len(coins.items) == 10 and coins.rotation_invariant
-    assert "VF-20" in coins.grade_multipliers
+
+
+def test_legacy_price_and_grade_fields_are_ignored(packs_dir, tmp_path):
+    old = tmp_path / "old"
+    shutil.copytree(packs_dir / "demo-stamps", old)
+    meta = json.loads((old / "pack.json").read_text())
+    meta |= {"currency": "USD", "grades": {"order": ["Fine"], "multipliers": {"Fine": 1}}}
+    (old / "pack.json").write_text(json.dumps(meta))
+    line = json.loads((old / "items.jsonl").read_text().splitlines()[0])
+    line["prices"] = [{"value": 3, "source": "x", "grade": "Fine"}]
+    (old / "items.jsonl").write_text(json.dumps(line) + "\n")
+    assert len(load_pack(old).items) == 1
 
 
 def test_pack_validation_errors(packs_dir, tmp_path):
@@ -48,10 +57,9 @@ def test_pack_validation_errors(packs_dir, tmp_path):
     (bad / "items.jsonl").write_text(json.dumps(line) + "\n")
     with pytest.raises(PackError, match="escapes"):
         load_pack(bad)
-    line["images"] = [{"path": "images/flower-1c.jpg"}]
-    line["prices"] = [{"value": 3, "source": "x", "grade": "Mint-ish"}]
+    line["images"] = [{"path": "images/missing.jpg"}]
     (bad / "items.jsonl").write_text(json.dumps(line) + "\n")
-    with pytest.raises(PackError, match="unknown grade"):
+    with pytest.raises(PackError, match="image not found"):
         load_pack(bad)
 
 
@@ -59,7 +67,7 @@ def test_identifies_exact_reference(engine, packs_dir):
     res = engine.identify(packs_dir / "demo-stamps/images/bird-10c.jpg")
     assert res["verdict"] in ("match", "ambiguous")
     assert res["candidates"][0]["key"] == "demo-stamps:bird-10c"
-    assert res["candidates"][0]["valuation"]["explanation"]
+    assert "valuation" not in res["candidates"][0]
 
 
 def test_identifies_simulated_photo_top3(engine, packs_dir):
@@ -97,50 +105,14 @@ def test_index_cache_and_incremental_learning(engine, packs_dir, tmp_path):
     assert res["candidates"][0]["key"] == "demo-stamps:crown-1d" and res["candidates"][0]["matched_learned"]
 
 
-def test_valuation_is_explained_and_robust(packs_dir):
-    pack = load_pack(packs_dir / "demo-coins")
-    item = pack.items["1-cent-1938"]
-    v = estimate_value(item, pack, "VF-20", as_of=date(2026, 10, 1))
-    assert v.estimate is not None and v.low <= v.estimate <= v.high
-    outlier = [c for c in v.comps if c.price == 95.0][0]
-    assert not outlier.used and "outlier" in outlier.note
-    assert any("weighted median" in line for line in v.explanation)
-    assert all(c.grade_factor is not None for c in v.comps if c.used)
-
-
-def test_grade_adjustment_math(packs_dir):
-    pack = load_pack(packs_dir / "demo-coins")
-    item = pack.items["5-cent-1921"]
-    v = estimate_value(item, pack, "MS-65", as_of=date(2026, 10, 1))
-    for c in v.comps:
-        if c.grade and c.used:
-            expected = c.price * pack.grade_multipliers["MS-65"] / pack.grade_multipliers[c.grade]
-            assert c.adjusted_price == pytest.approx(expected)
-
-
-def test_no_prices_gives_no_estimate(packs_dir):
-    pack = load_pack(packs_dir / "demo-stamps")
-    item = pack.items["bird-10c"]
-    item.prices = []
-    v = estimate_value(item, pack)
-    assert v.estimate is None and v.confidence == "none"
-
-
-def test_thin_data_is_low_confidence(packs_dir):
-    pack = load_pack(packs_dir / "demo-coins")
-    v = estimate_value(pack.items["2-crown-1901"], pack, "EF-40", as_of=date(2026, 10, 1))
-    assert v.confidence in ("low", "medium")
-
-
 def test_cli_contributor_workflow(tmp_path, packs_dir, capsys):
     from curio.cli import main
     pack = tmp_path / "my-pack"
     main(["new-pack", str(pack), "--id", "my-stamps", "--name", "My stamps", "--domain", "stamp"])
     main(["add-item", str(pack), "--id", "a1", "--title", "Test stamp",
           "--image", str(packs_dir / "demo-stamps/images/bird-10c.jpg"), "--attr", "country=Examplia"])
-    main(["add-price", str(pack), "a1", "--value", "4.5", "--source", "my notes", "--date", "2026-01-02"])
     p = load_pack(pack)
-    assert p.items["a1"].prices[0].value == 4.5
+    assert p.items["a1"].attributes == {"country": "Examplia"} and len(p.items["a1"].images) == 1
     with pytest.raises(SystemExit) as e:
         main(["validate", str(pack)])
     assert e.value.code == 0
@@ -159,10 +131,9 @@ def test_web_api(engine, packs_dir):
     assert top["key"] == "demo-stamps:flower-1c"
     assert client.get(top["matched_image_url"]).status_code == 200
     assert client.get("/img/not-a-real-token").status_code == 404
-    v = client.get("/api/value", params={"item": top["key"], "grade": "Superb"}).json()
-    assert v["target_grade"] == "Superb"
+    assert client.get("/api/value", params={"item": top["key"]}).status_code == 404
     assert client.post("/api/confirm", json={"upload_id": res["upload_id"], "item_key": top["key"]}).json()["ok"]
-    client.post("/api/collection", json={"item_key": top["key"], "grade": "Fine", "upload_id": res["upload_id"]})
+    client.post("/api/collection", json={"item_key": top["key"], "upload_id": res["upload_id"]})
     coll = client.get("/api/collection").json()
     assert len(coll["items"]) == 1 and coll["items"][0]["photo_url"]
     assert client.post("/api/identify", files={"file": ("x.jpg", b"not an image", "image/jpeg")}).status_code == 400

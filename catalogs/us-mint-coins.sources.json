@@ -5,33 +5,15 @@
   "domain": "coin",
   "version": "0.1.0",
   "license": "Images: public domain (US government works). Catalog data: CC0-1.0.",
-  "currency": "USD",
   "rotation_invariant": true,
   "recommended_embedder": {
    "name": "dinov2",
    "model": "facebook/dinov2-small"
   },
-  "description": "US coin design types with public-domain reference images from the United States Mint and the Smithsonian National Numismatic Collection, verified via Wikimedia Commons. No price data yet.",
+  "description": "US coin design types with public-domain reference images from the United States Mint and the Smithsonian National Numismatic Collection, verified via Wikimedia Commons.",
   "maintainers": [
    "curio project"
-  ],
-  "grades": {
-   "scale": "Sheldon",
-   "order": [
-    "P-1",
-    "FR-2",
-    "G-4",
-    "VG-8",
-    "F-12",
-    "VF-20",
-    "EF-40",
-    "AU-50",
-    "MS-60",
-    "MS-63",
-    "MS-65",
-    "MS-67"
-   ]
-  }
+  ]
  },
  "items": [
   {

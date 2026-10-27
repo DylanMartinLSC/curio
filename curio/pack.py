@@ -3,8 +3,8 @@
 A pack is a plain directory, easy to review in a pull request:
 
     my-pack/
-      pack.json      metadata, grade scale, defaults
-      items.jsonl    one catalog item per line (title, attributes, images, price observations)
+      pack.json      metadata and defaults
+      items.jsonl    one catalog item per line (title, attributes, images, notes)
       images/        reference photos (any path relative to the pack dir works)
 
 Packs ship images and metadata, never model vectors, so any embedder can index them.
@@ -17,9 +17,6 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
-
-PRICE_KINDS = ("sale", "guide", "ask")
-
 
 class PackError(ValueError):
     pass
@@ -34,23 +31,11 @@ class ImageRef:
 
 
 @dataclass
-class PriceObservation:
-    value: float
-    currency: str
-    grade: str | None
-    date: str | None  # ISO yyyy-mm-dd
-    source: str
-    kind: str = "sale"  # sale (realized), guide (catalog/guide value), ask (listing price)
-    url: str = ""
-
-
-@dataclass
 class Item:
     id: str
     title: str
     attributes: dict[str, Any]
     images: list[ImageRef]
-    prices: list[PriceObservation]
     notes: str = ""
     pack_id: str = ""
 
@@ -67,9 +52,6 @@ class Pack:
     domain: str
     version: str
     license: str
-    currency: str
-    grades: list[str]
-    grade_multipliers: dict[str, float]
     rotation_invariant: bool
     recommended_embedder: tuple[str, str | None] | None = None  # (name, model id or None for the default)
     description: str = ""
@@ -90,7 +72,7 @@ class Pack:
     def to_summary(self) -> dict:
         return {
             "id": self.id, "name": self.name, "domain": self.domain, "version": self.version,
-            "license": self.license, "currency": self.currency, "items": len(self.items),
+            "license": self.license, "items": len(self.items),
             "images": sum(len(i.images) for i in self.items.values()),
             "description": self.description,
             "recommended_embedder": ({"name": self.recommended_embedder[0], "model": self.recommended_embedder[1]}
@@ -115,16 +97,6 @@ def load_pack(root: str | Path) -> Pack:
     meta = json.loads(meta_path.read_text(encoding="utf-8"))
     where = str(meta_path)
 
-    grades_cfg = meta.get("grades") or {}
-    grades = list(grades_cfg.get("order", []))
-    mults = {k: float(v) for k, v in (grades_cfg.get("multipliers") or {}).items()}
-    for g in mults:
-        if g not in grades:
-            raise PackError(f"{where}: grade multiplier for unknown grade '{g}'")
-    for m in mults.values():
-        if m <= 0:
-            raise PackError(f"{where}: grade multipliers must be positive")
-
     pack = Pack(
         root=root,
         id=_require(meta, "id", where),
@@ -132,9 +104,6 @@ def load_pack(root: str | Path) -> Pack:
         domain=_require(meta, "domain", where),
         version=str(meta.get("version", "0.0.0")),
         license=_require(meta, "license", where),
-        currency=meta.get("currency", "USD"),
-        grades=grades,
-        grade_multipliers=mults,
         rotation_invariant=bool(meta.get("rotation_invariant", False)),
         recommended_embedder=_parse_recommended(meta.get("recommended_embedder"), where),
         description=meta.get("description", ""),
@@ -184,33 +153,11 @@ def _parse_item(raw: dict, pack: Pack, where: str) -> Item:
     if not images:
         raise PackError(f"{where}: item needs at least one image")
 
-    prices = []
-    for pr in raw.get("prices", []):
-        kind = pr.get("kind", "sale")
-        if kind not in PRICE_KINDS:
-            raise PackError(f"{where}: price kind must be one of {PRICE_KINDS}")
-        grade = pr.get("grade")
-        if grade is not None and pack.grades and grade not in pack.grades:
-            raise PackError(f"{where}: unknown grade '{grade}' (pack grades: {pack.grades})")
-        value = float(_require(pr, "value", where))
-        if value <= 0:
-            raise PackError(f"{where}: price value must be positive")
-        prices.append(PriceObservation(
-            value=value,
-            currency=pr.get("currency", pack.currency),
-            grade=grade,
-            date=pr.get("date"),
-            source=_require(pr, "source", where),
-            kind=kind,
-            url=pr.get("url", ""),
-        ))
-
     return Item(
         id=str(_require(raw, "id", where)),
         title=_require(raw, "title", where),
         attributes=dict(raw.get("attributes", {})),
         images=images,
-        prices=prices,
         notes=raw.get("notes", ""),
         pack_id=pack.id,
     )

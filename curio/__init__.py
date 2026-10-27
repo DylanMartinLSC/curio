@@ -1,3 +1,3 @@
-"""Curio: local, open-source collectible identification with explainable valuations."""
+"""Curio: local, open-source identification of coins, stamps and other collectibles."""
 
 __version__ = "0.1.0"

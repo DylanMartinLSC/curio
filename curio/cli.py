@@ -1,4 +1,4 @@
-"""Command line: identify, value, serve, and maintain packs."""
+"""Command line: identify, search, serve, and maintain packs."""
 
 from __future__ import annotations
 
@@ -30,47 +30,23 @@ def _print_result(res: dict):
     for line in res["explanation"]:
         print(f"  {line}")
     for i, c in enumerate(res["candidates"], 1):
-        v = c["valuation"]
-        price = (f"{v['estimate']:,.2f} {v['currency']} (range {v['low']:,.2f}-{v['high']:,.2f}, {v['confidence']} confidence)"
-                 if v["estimate"] is not None else "no price data")
         print(f"\n{i}. {c['title']}  [{c['key']}]")
         print(f"   similarity {c['similarity']:.3f}  confidence {c['confidence']:.0%}")
         if c["attributes"]:
             print("   " + ", ".join(f"{k}: {val}" for k, val in c["attributes"].items()))
-        print(f"   value: {price}")
-    if res["candidates"] and res["candidates"][0]["valuation"]["estimate"] is not None:
-        print("\nHow the top estimate was made:")
-        for line in res["candidates"][0]["valuation"]["explanation"]:
-            print(f"  - {line}")
+        if c["notes"]:
+            print(f"   {c['notes']}")
 
 
 def cmd_identify(a):
     eng = _engine(a)
-    res = eng.identify(a.image, a.top, a.domain, a.pack_id, a.grade)
+    res = eng.identify(a.image, a.top, a.domain, a.pack_id)
     print(json.dumps(res, indent=2, default=str)) if a.json else _print_result(res)
 
 
 def cmd_search(a):
     res = _engine(a).search_text(a.text, a.top, a.domain)
     print(json.dumps(res, indent=2, default=str)) if a.json else _print_result(res)
-
-
-def cmd_value(a):
-    v = _engine(a).valuation(a.item, a.grade)
-    if a.json:
-        print(json.dumps(v, indent=2))
-        return
-    if v["estimate"] is None:
-        print("No estimate.")
-    else:
-        print(f"{v['estimate']:,.2f} {v['currency']}  (range {v['low']:,.2f}-{v['high']:,.2f}, {v['confidence']} confidence)")
-    for line in v["explanation"]:
-        print(f"  - {line}")
-    print("\n  used  weight  kind   date        grade   price      adj.price  source / note")
-    for c in v["comps"]:
-        print(f"  {'yes ' if c['used'] else 'no  '}  {c['weight']:.3f}   {c['kind']:<5}  {c['date'] or '-':<10}  "
-              f"{c['grade'] or '-':<6}  {c['price']:>9,.2f}  {c['adjusted_price']:>9,.2f}  {c['source']}"
-              + (f"  ({c['note']})" if c["note"] else ""))
 
 
 def cmd_index(a):
@@ -94,10 +70,9 @@ def cmd_validate(a):
     for d in a.dirs:
         try:
             p = load_pack(d)
-            no_price = sum(1 for i in p.items.values() if not i.prices)
-            missing_mult = [g for g in p.grades if g not in p.grade_multipliers]
-            print(f"OK   {p.id}: {len(p.items)} items, {no_price} without prices"
-                  + (f"; grades without multipliers: {missing_mult}" if missing_mult else ""))
+            n_img = sum(len(i.images) for i in p.items.values())
+            single = sum(1 for i in p.items.values() if len(i.images) == 1)
+            print(f"OK   {p.id}: {len(p.items)} items, {n_img} images ({single} items with a single image)")
         except PackError as e:
             ok = False
             print(f"FAIL {d}: {e}")
@@ -121,9 +96,8 @@ def cmd_new_pack(a):
     (root / "images").mkdir(parents=True, exist_ok=True)
     meta = {
         "id": a.id, "name": a.name, "domain": a.domain, "version": "0.1.0", "license": a.license,
-        "currency": a.currency, "rotation_invariant": a.domain == "coin",
+        "rotation_invariant": a.domain == "coin",
         "description": "", "maintainers": [],
-        "grades": {"order": [], "multipliers": {}},
     }
     (root / "pack.json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
     (root / "items.jsonl").write_text("", encoding="utf-8")
@@ -142,29 +116,11 @@ def cmd_add_item(a):
         shutil.copy2(src, dest)
         images.append({"path": dest.relative_to(pack.root).as_posix(), "license": a.image_license, "source": a.image_source})
     attrs = dict(kv.split("=", 1) for kv in a.attr)
-    item = {"id": a.id, "title": a.title, "attributes": attrs, "images": images, "prices": []}
+    item = {"id": a.id, "title": a.title, "attributes": attrs, "images": images}
     with open(pack.root / "items.jsonl", "a", encoding="utf-8") as f:
         f.write(json.dumps(item) + "\n")
     load_pack(pack.root)
     print(f"added {pack.id}:{a.id}")
-
-
-def cmd_add_price(a):
-    pack = load_pack(a.pack)
-    lines = (pack.root / "items.jsonl").read_text(encoding="utf-8").splitlines()
-    for n, line in enumerate(lines):
-        if line.strip() and not line.lstrip().startswith("#") and json.loads(line)["id"] == a.item:
-            obj = json.loads(line)
-            obj.setdefault("prices", []).append({k: v for k, v in {
-                "value": a.value, "currency": a.currency or pack.currency, "grade": a.grade, "date": a.date,
-                "source": a.source, "kind": a.kind, "url": a.url}.items() if v not in (None, "")})
-            lines[n] = json.dumps(obj)
-            break
-    else:
-        sys.exit(f"no item {a.item} in {pack.id}")
-    (pack.root / "items.jsonl").write_text("\n".join(lines) + "\n", encoding="utf-8")
-    load_pack(pack.root)
-    print(f"added price to {pack.id}:{a.item}")
 
 
 def cmd_eval(a):
@@ -202,7 +158,6 @@ def main(argv=None):
     s.add_argument("--top", type=int, default=5)
     s.add_argument("--domain", help="coin, stamp, ...")
     s.add_argument("--pack-id", nargs="*")
-    s.add_argument("--grade", help="value at this grade (e.g. VF-20)")
     s.add_argument("--json", action="store_true")
     s.set_defaults(fn=cmd_identify)
 
@@ -212,12 +167,6 @@ def main(argv=None):
     s.add_argument("--domain")
     s.add_argument("--json", action="store_true")
     s.set_defaults(fn=cmd_search)
-
-    s = sub.add_parser("value", help="explain the value of a catalog item")
-    s.add_argument("item", help="pack:item")
-    s.add_argument("--grade")
-    s.add_argument("--json", action="store_true")
-    s.set_defaults(fn=cmd_value)
 
     sub.add_parser("index", help="build/refresh the vector indexes").set_defaults(fn=cmd_index)
 
@@ -247,7 +196,6 @@ def main(argv=None):
     s.add_argument("--name", required=True)
     s.add_argument("--domain", required=True, help="coin, stamp, card, comic, antique, ...")
     s.add_argument("--license", default="CC-BY-SA-4.0")
-    s.add_argument("--currency", default="USD")
     s.set_defaults(fn=cmd_new_pack)
 
     s = sub.add_parser("add-item", help="add an item with reference photos to a pack")
@@ -259,18 +207,6 @@ def main(argv=None):
     s.add_argument("--image-license", default="")
     s.add_argument("--image-source", default="")
     s.set_defaults(fn=cmd_add_item)
-
-    s = sub.add_parser("add-price", help="record a price observation for an item")
-    s.add_argument("pack")
-    s.add_argument("item")
-    s.add_argument("--value", type=float, required=True)
-    s.add_argument("--source", required=True, help="e.g. 'Heritage Auctions lot 1234'")
-    s.add_argument("--kind", default="sale", choices=["sale", "guide", "ask"])
-    s.add_argument("--grade")
-    s.add_argument("--date", help="YYYY-MM-DD")
-    s.add_argument("--currency")
-    s.add_argument("--url", default="")
-    s.set_defaults(fn=cmd_add_price)
 
     a = ap.parse_args(argv)
     a.fn(a)

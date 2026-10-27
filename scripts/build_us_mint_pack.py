@@ -218,7 +218,7 @@ def build(sources_path: Path, out: Path, cache: Path, strict: bool) -> int:
             print(f"  WARNING {it['id']}: no verified images, item left out", file=sys.stderr)
             continue
         lines.append(json.dumps({"id": it["id"], "title": it["title"], "attributes": it.get("attributes", {}),
-                                 "images": images, "prices": it.get("prices", []), "notes": it.get("notes", "")},
+                                 "images": images, "notes": it.get("notes", "")},
                                 ensure_ascii=False))
 
     for stale in (out / "images").glob("*.jpg"):  # images from items/files that were removed

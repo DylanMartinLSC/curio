@@ -5,7 +5,6 @@ from __future__ import annotations
 import io
 import os
 from collections import Counter
-from datetime import date
 from pathlib import Path
 
 import numpy as np
@@ -14,7 +13,6 @@ from PIL import Image
 from .embed import CALIBRATION, Embedder, create_embedder, embedder_key, family, load_image, preprocess
 from .index import LearnedStore, VectorIndex, build_or_load
 from .pack import Item, Pack, discover_packs
-from .valuation import estimate_value, value_by_grade
 
 ROTATIONS = (0, 45, 90, 135, 180, 225, 270, 315)
 AUTO = "auto"
@@ -87,7 +85,7 @@ class Curio:
 
     @property
     def embedder(self) -> Embedder:
-        """Loaded on first use, so valuation-only commands don't pay for loading a model."""
+        """Loaded on first use, so commands that never embed an image don't pay for loading a model."""
         if self._embedder is None:
             self._embedder = create_embedder(*self._embedder_spec)
         return self._embedder
@@ -122,8 +120,7 @@ class Curio:
         return packs
 
     # ---- identification --------------------------------------------------
-    def identify(self, image, top_k: int = 5, domain: str | None = None, pack_ids: list[str] | None = None,
-                 grade: str | None = None) -> dict:
+    def identify(self, image, top_k: int = 5, domain: str | None = None, pack_ids: list[str] | None = None) -> dict:
         img = image if isinstance(image, Image.Image) else load_image(image)
         packs = self._select(domain, pack_ids)
 
@@ -141,7 +138,7 @@ class Curio:
                 hits.append(h)
         hits.sort(key=lambda h: -h["similarity"])
         hits = hits[:top_k]
-        return self._package(hits, grade, query_kind="image")
+        return self._package(hits, query_kind="image")
 
     def search_text(self, text: str, top_k: int = 5, domain: str | None = None) -> dict:
         if not self.embedder.supports_text:
@@ -151,9 +148,9 @@ class Curio:
         for pack in self._select(domain, None):
             hits += self.index(pack.id).search(q, top_k)
         hits.sort(key=lambda h: -h["similarity"])
-        return self._package(hits[:top_k], None, query_kind="text")
+        return self._package(hits[:top_k], query_kind="text")
 
-    def _package(self, hits: list[dict], grade: str | None, query_kind: str) -> dict:
+    def _package(self, hits: list[dict], query_kind: str) -> dict:
         cal = self.calibration
         sims = np.array([h["similarity"] for h in hits]) if hits else np.zeros(0)
         probs = np.exp((sims - sims.max()) / cal["temperature"]) if len(sims) else sims
@@ -162,15 +159,11 @@ class Curio:
         candidates = []
         for h, p in zip(hits, probs):
             pack, item = self.item(h["item_key"])
-            g = grade if (grade and grade in pack.grades) else None
-            val = estimate_value(item, pack, g)
             candidates.append({
                 "key": item.key, "title": item.title, "pack": pack.id, "pack_name": pack.name,
                 "domain": pack.domain, "attributes": item.attributes, "notes": item.notes,
                 "similarity": round(h["similarity"], 4), "confidence": round(float(p), 4),
                 "matched_image": h["matched_image"], "matched_learned": h["matched_learned"],
-                "grades": pack.grades, "valuation": val.to_dict(),
-                "value_by_grade": value_by_grade(item, pack),
             })
 
         top = candidates[0] if candidates else None
@@ -212,7 +205,3 @@ class Curio:
         path = self.learned.add(pack.id, item.id, image_bytes)
         self._indexes.pop(pack.id, None)  # rebuild on next use
         return path
-
-    def valuation(self, item_key: str, grade: str | None = None, as_of: date | None = None) -> dict:
-        pack, item = self.item(item_key)
-        return estimate_value(item, pack, grade, as_of).to_dict()

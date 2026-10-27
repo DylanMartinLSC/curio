@@ -29,7 +29,6 @@ class ConfirmBody(BaseModel):
 
 class CollectBody(BaseModel):
     item_key: str
-    grade: str | None = None
     upload_id: str | None = None
     note: str = ""
 
@@ -39,21 +38,22 @@ class Collection:
         path.parent.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(path, check_same_thread=False)
         self.lock = threading.Lock()
+        # `grade` is no longer written; the column stays so collection files from older versions still open.
         self.db.execute("""create table if not exists items (
             id integer primary key, item_key text not null, grade text, photo blob,
             note text, added text not null)""")
         self.db.commit()
 
-    def add(self, item_key, grade, photo, note) -> int:
+    def add(self, item_key, photo, note) -> int:
         with self.lock:
-            cur = self.db.execute("insert into items(item_key, grade, photo, note, added) values (?,?,?,?,?)",
-                                  (item_key, grade, photo, note, datetime.now().isoformat(timespec="seconds")))
+            cur = self.db.execute("insert into items(item_key, photo, note, added) values (?,?,?,?)",
+                                  (item_key, photo, note, datetime.now().isoformat(timespec="seconds")))
             self.db.commit()
             return cur.lastrowid
 
     def all(self):
         with self.lock:
-            return self.db.execute("select id, item_key, grade, note, added, photo is not null from items order by id desc").fetchall()
+            return self.db.execute("select id, item_key, note, added, photo is not null from items order by id desc").fetchall()
 
     def photo(self, rid):
         with self.lock:
@@ -111,11 +111,10 @@ def create_app(engine: Curio) -> FastAPI:
     def packs():
         return {"embedder": engine.embedder.key, "supports_text": engine.embedder.supports_text,
                 "notes": engine.embedder_notes,
-                "packs": [p.to_summary() | {"grades": p.grades} for p in engine.packs.values()]}
+                "packs": [p.to_summary() for p in engine.packs.values()]}
 
     @app.post("/api/identify")
-    async def identify(file: UploadFile = File(...), domain: str = Form(""), grade: str = Form(""),
-                       top: int = Form(5)):
+    async def identify(file: UploadFile = File(...), domain: str = Form(""), top: int = Form(5)):
         data = await file.read()
         if len(data) > MAX_UPLOAD:
             raise HTTPException(413, "image too large")
@@ -129,7 +128,7 @@ def create_app(engine: Curio) -> FastAPI:
             uploads.popitem(last=False)
         try:
             with lock:
-                res = engine.identify(image, top_k=max(1, min(top, 20)), domain=domain or None, grade=grade or None)
+                res = engine.identify(image, top_k=max(1, min(top, 20)), domain=domain or None)
         except ValueError as e:
             raise HTTPException(400, str(e))
         return decorate(res) | {"upload_id": uid}
@@ -140,13 +139,6 @@ def create_app(engine: Curio) -> FastAPI:
             with lock:
                 return decorate(engine.search_text(q, max(1, min(top, 20)), domain or None))
         except ValueError as e:
-            raise HTTPException(400, str(e))
-
-    @app.get("/api/value")
-    def value(item: str, grade: str = ""):
-        try:
-            return engine.valuation(item, grade or None)
-        except (KeyError, ValueError) as e:
             raise HTTPException(400, str(e))
 
     @app.post("/api/confirm")
@@ -164,19 +156,14 @@ def create_app(engine: Curio) -> FastAPI:
     @app.get("/api/collection")
     def list_collection():
         rows = []
-        for rid, key, grade, note, added, has_photo in collection.all():
+        for rid, key, note, added, has_photo in collection.all():
             try:
-                pack, item = engine.item(key)
-                v = engine.valuation(key, grade)
-                title = item.title
+                title = engine.item(key)[1].title
             except KeyError:
-                title, v = f"{key} (pack not installed)", None
-            rows.append({"id": rid, "item_key": key, "title": title, "grade": grade, "note": note, "added": added,
-                         "photo_url": f"/api/collection/{rid}/photo" if has_photo else None,
-                         "estimate": v and v["estimate"], "low": v and v["low"], "high": v and v["high"],
-                         "currency": v and v["currency"], "confidence": v and v["confidence"]})
-        total = sum(r["estimate"] or 0 for r in rows)
-        return {"items": rows, "total_estimate": round(total, 2)}
+                title = f"{key} (pack not installed)"
+            rows.append({"id": rid, "item_key": key, "title": title, "note": note, "added": added,
+                         "photo_url": f"/api/collection/{rid}/photo" if has_photo else None})
+        return {"items": rows}
 
     @app.post("/api/collection")
     def add_collection(body: CollectBody):
@@ -191,7 +178,7 @@ def create_app(engine: Curio) -> FastAPI:
             buf = io.BytesIO()
             im.save(buf, "JPEG", quality=85)
             photo = buf.getvalue()
-        return {"id": collection.add(body.item_key, body.grade, photo, body.note)}
+        return {"id": collection.add(body.item_key, photo, body.note)}
 
     @app.get("/api/collection/{rid}/photo")
     def collection_photo(rid: int):

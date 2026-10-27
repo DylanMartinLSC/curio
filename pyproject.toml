@@ -1,7 +1,7 @@
 [project]
 name = "curio"
 version = "0.1.0"
-description = "Free, local, open-source identifier for coins, stamps and other collectibles, with explainable price estimates."
+description = "Free, local, open-source identifier for coins, stamps and other collectibles."
 readme = "README.md"
 license = { text = "Apache-2.0" }
 requires-python = ">=3.10"

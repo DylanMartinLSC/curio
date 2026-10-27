@@ -36,14 +36,11 @@ button.ghost{background:none;border:1px solid var(--line);color:var(--ink);borde
 .compare figure{margin:0}.compare img{width:100%;aspect-ratio:1;object-fit:contain;background:var(--chip);border-radius:8px}
 .compare figcaption{font-size:12px;color:var(--muted);margin-top:4px}
 .thumbs{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}.thumbs img{width:48px;height:48px;object-fit:contain;border-radius:4px;background:var(--chip);cursor:pointer}
-.price{font-size:28px;font-weight:700;margin:4px 0}
 .chip{display:inline-block;padding:2px 8px;border-radius:999px;background:var(--chip);font-size:12px}
-.conf-high{color:var(--ok)}.conf-medium{color:var(--warn)}.conf-low,.conf-none{color:var(--bad)}
 table{border-collapse:collapse;width:100%;font-size:13px}
 th,td{text-align:left;padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:top}
 th{color:var(--muted);font-weight:500}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
-tr.excluded td{color:var(--muted);text-decoration:line-through}tr.excluded td.note{text-decoration:none}
 .scroll{overflow-x:auto}
 h2{font-size:16px;margin:18px 0 8px}h3{font-size:14px;margin:14px 0 6px;color:var(--muted);font-weight:600}
 ul.explain{margin:0;padding-left:18px}ul.explain li{margin:3px 0}
@@ -80,7 +77,6 @@ ul.explain{margin:0;padding-left:18px}ul.explain li{margin:3px 0}
 <script>
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const money = (v, c) => v == null ? "—" : v.toLocaleString(undefined, {minimumFractionDigits: v < 100 ? 2 : 0, maximumFractionDigits: v < 100 ? 2 : 0}) + " " + c;
 let state = {res: null, sel: 0, photo: null, info: null};
 
 function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.append(t);setTimeout(()=>t.remove(),2500)}
@@ -158,48 +154,25 @@ function renderDetail(){
     ${c.notes ? `<p class="muted">${esc(c.notes)}</p>` : ""}
     <div class="row" style="margin-top:12px">
       ${state.res.upload_id ? `<button class="primary" id="confirm">Yes, this is it</button>` : ""}
-      <label>Grade <select id="grade"><option value="">Not specified</option>${c.grades.map(g=>`<option ${g===c.valuation.target_grade?"selected":""}>${esc(g)}</option>`).join("")}</select></label>
       <button class="ghost" id="collect">Add to collection</button>
-    </div>
-    <div id="val"></div>`;
+    </div>`;
   document.querySelectorAll(".thumbs img").forEach(t => t.onclick = () => $("#refimg").src = t.src);
-  $("#grade").onchange = async e => renderValuation(await api(`/api/value?item=${encodeURIComponent(c.key)}&grade=${encodeURIComponent(e.target.value)}`), c);
   if ($("#confirm")) $("#confirm").onclick = async () => {
     await api("/api/confirm", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({upload_id: state.res.upload_id, item_key: c.key})});
     toast("Thanks — saved as a local reference so similar photos match better.");
   };
   $("#collect").onclick = async () => {
-    await api("/api/collection", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({item_key: c.key, grade: $("#grade").value || null, upload_id: state.res.upload_id || null})});
+    await api("/api/collection", {method:"POST", headers:{"content-type":"application/json"}, body: JSON.stringify({item_key: c.key, upload_id: state.res.upload_id || null})});
     toast("Added to your collection.");
   };
-  renderValuation(c.valuation, c);
-}
-function renderValuation(v, c){
-  const byGrade = c.value_by_grade.filter(r => r.estimate != null);
-  $("#val").innerHTML = `
-    <h3>Estimated value${v.target_grade ? " at " + esc(v.target_grade) : ""}</h3>
-    ${v.estimate == null ? `<p>No estimate: this item has no usable price data yet.</p>` :
-      `<div class="price">${money(v.estimate, v.currency)}</div>
-       <div>Range ${money(v.low, v.currency)} – ${money(v.high, v.currency)} · <span class="conf-${v.confidence}">${v.confidence} confidence</span></div>`}
-    <h3>How this number was worked out</h3>
-    <ul class="explain">${v.explanation.map(l=>`<li>${esc(l)}</li>`).join("")}</ul>
-    ${v.comps.length ? `<h3>Price observations used</h3><div class="scroll"><table>
-      <tr><th>Source</th><th>Kind</th><th>Date</th><th>Grade</th><th class="num">Price</th><th class="num">Adjusted</th><th class="num">Weight</th><th>Note</th></tr>
-      ${v.comps.map(p=>`<tr class="${p.used?"":"excluded"}"><td>${p.url?`<a href="${esc(p.url)}" target="_blank" rel="noopener noreferrer">${esc(p.source)}</a>`:esc(p.source)}</td><td>${esc(p.kind)}</td><td style="white-space:nowrap">${esc(p.date||"—")}</td><td style="white-space:nowrap">${esc(p.grade||"—")}</td>
-        <td class="num">${p.price.toFixed(2)}</td><td class="num">${p.adjusted_price.toFixed(2)}</td><td class="num">${p.used?p.weight.toFixed(3):"—"}</td><td class="note muted">${esc(p.note)}</td></tr>`).join("")}
-    </table></div>` : ""}
-    ${byGrade.length ? `<h3>Value by grade</h3><div class="scroll"><table><tr><th>Grade</th><th class="num">Estimate</th><th class="num">Range</th><th>Confidence</th></tr>
-      ${byGrade.map(r=>`<tr><td>${esc(r.grade)}</td><td class="num">${money(r.estimate, v.currency)}</td><td class="num">${money(r.low, "")}– ${money(r.high, "")}</td><td class="conf-${r.confidence}">${r.confidence}</td></tr>`).join("")}</table></div>` : ""}`;
 }
 
 async function loadCollection(){
   const d = await api("/api/collection");
   $("#coll").innerHTML = `<h2 style="margin-top:0">My collection</h2>
-    ${d.items.length ? `<p>Total estimate: <b>${money(d.total_estimate, d.items[0].currency || "")}</b> <span class="muted">(sum of point estimates; recomputed from current pack data)</span></p>
-    <div class="scroll"><table><tr><th></th><th>Item</th><th>Grade</th><th class="num">Estimate</th><th class="num">Range</th><th>Added</th><th></th></tr>
+    ${d.items.length ? `<div class="scroll"><table><tr><th></th><th>Item</th><th>Added</th><th></th></tr>
     ${d.items.map(r=>`<tr><td>${r.photo_url?`<img src="${r.photo_url}" style="width:48px;height:48px;object-fit:contain;border-radius:4px">`:""}</td>
-      <td>${esc(r.title)}<br><span class="muted">${esc(r.item_key)}</span></td><td>${esc(r.grade||"—")}</td>
-      <td class="num">${money(r.estimate, r.currency||"")}</td><td class="num">${r.low!=null?money(r.low,"")+"– "+money(r.high,""):"—"}</td>
+      <td>${esc(r.title)}<br><span class="muted">${esc(r.item_key)}</span></td>
       <td>${esc(r.added.slice(0,10))}</td><td><button class="ghost" data-del="${r.id}">Remove</button></td></tr>`).join("")}</table></div>`
     : `<p class="muted">Nothing here yet. Identify something and press “Add to collection”.</p>`}`;
   document.querySelectorAll("[data-del]").forEach(b => b.onclick = async () => {await fetch("/api/collection/"+b.dataset.del,{method:"DELETE"}); loadCollection();});

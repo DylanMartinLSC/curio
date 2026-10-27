@@ -91,21 +91,19 @@ def main():
         for page in (hi, lo):
             page.evaluate("window.scrollTo(0, 0)")
 
-        # 2. The explainable valuation, shown on the demo pack (fictional prices; the real pack has none yet).
-        demo = phone_photo(ROOT / "packs/demo-coins/images/25-cent-1912-obverse.jpg", -40, 2)
-        for page in (hi, lo):
-            identify(page, demo)
-        gif.append((frame(lo), 1800))
-        for page in (hi, lo):
-            page.select_option("#grade", "EF-40")
-            page.wait_for_timeout(700)
-            page.evaluate("document.querySelector('#val').scrollIntoView({block: 'start'})")
-            page.wait_for_timeout(300)
-        hi.locator("#val").screenshot(path=str(OUT / "valuation.png"))
-        gif.append((frame(lo), 4200))
-        lo.evaluate("window.scrollBy(0, 420)")
-        lo.wait_for_timeout(300)
+        # 2. One specific design out of many similar quarters.
+        quarter = phone_photo(ROOT / "packs/us-mint-coins/images/quarter-atb-yellowstone-reverse.jpg", -40, 2)
+        identify(lo, quarter)
         gif.append((frame(lo), 3200))
+        lo.evaluate("document.querySelector('#detail h2').scrollIntoView({block: 'start'})")
+        lo.wait_for_timeout(300)
+        gif.append((frame(lo), 2600))
+
+        # 3. The installed packs.
+        lo.evaluate("window.scrollTo(0, 0)")
+        lo.click("nav button[data-tab=packs]")
+        lo.wait_for_timeout(300)
+        gif.append((frame(lo), 2600))
         browser.close()
 
     frames = [f.resize((900, round(900 * f.height / f.width)), Image.LANCZOS) for f, _ in gif]
@@ -113,7 +111,7 @@ def main():
     frames = [f.quantize(palette=palette, dither=Image.Dither.NONE) for f in frames]
     frames[0].save(OUT / "demo.gif", save_all=True, append_images=frames[1:],
                    duration=[d for _, d in gif], loop=0, optimize=True)
-    for name in ("identify.png", "valuation.png", "demo.gif"):
+    for name in ("identify.png", "demo.gif"):
         print(name, (OUT / name).stat().st_size // 1024, "KB")
 
 

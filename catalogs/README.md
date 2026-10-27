@@ -80,5 +80,4 @@ Before opening a pull request:
   - 13 of the 56 America the Beautiful quarters;
   - 13 of the 40 Presidential dollars;
   - 5 of the Native American dollar years.
-- **There is no price data.** The pack identifies coins, and attributes such as composition and `silver_troy_oz` help you judge a coin's worth, but valuation needs sourced sale records added with `curio add-price` or the `prices` field.
 - **One item per design type,** not per date and mint mark. Dates and mint marks are small details that whole-image matching can't reliably read. Per-item `notes` list the key dates to check.
