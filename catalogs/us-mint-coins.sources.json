@@ -1,0 +1,1851 @@
+{
+ "pack": {
+  "id": "us-mint-coins",
+  "name": "US coins (United States Mint images)",
+  "domain": "coin",
+  "version": "0.1.0",
+  "license": "Images: public domain (US government works). Catalog data: CC0-1.0.",
+  "currency": "USD",
+  "rotation_invariant": true,
+  "recommended_embedder": {
+   "name": "dinov2",
+   "model": "facebook/dinov2-small"
+  },
+  "description": "US coin design types with public-domain reference images from the United States Mint and the Smithsonian National Numismatic Collection, verified via Wikimedia Commons. No price data yet.",
+  "maintainers": [
+   "curio project"
+  ],
+  "grades": {
+   "scale": "Sheldon",
+   "order": [
+    "P-1",
+    "FR-2",
+    "G-4",
+    "VG-8",
+    "F-12",
+    "VF-20",
+    "EF-40",
+    "AU-50",
+    "MS-60",
+    "MS-63",
+    "MS-65",
+    "MS-67"
+   ]
+  }
+ },
+ "items": [
+  {
+   "id": "cent-lincoln-shield",
+   "title": "Lincoln cent, Union Shield reverse (2010-present)",
+   "attributes": {
+    "denomination": "1 cent",
+    "composition": "copper-plated zinc (97.5% Zn, 2.5% Cu)",
+    "mass_g": 2.5,
+    "diameter_mm": 19.05,
+    "edge": "plain",
+    "years": "2010-present",
+    "obverse_designer": "Victor D. Brenner",
+    "reverse_designer": "Lyndall Bass"
+   },
+   "files": {
+    "obverse": [
+     "File:US One Cent Obv.png",
+     "File:2010 cent obverse.png",
+     "File:2025 Lincoln cent obverse, uncirculated, Philadelphia mint.jpg"
+    ],
+    "reverse": [
+     "File:US One Cent Reverse.png"
+    ]
+   },
+   "notes": "Circulation pennies were last struck for commerce in 2025."
+  },
+  {
+   "id": "cent-lincoln-memorial",
+   "title": "Lincoln cent, Memorial reverse (1959-2008)",
+   "attributes": {
+    "denomination": "1 cent",
+    "composition": "bronze to 1982, copper-plated zinc from 1982",
+    "mass_g": 2.5,
+    "diameter_mm": 19.05,
+    "edge": "plain",
+    "years": "1959-2008",
+    "obverse_designer": "Victor D. Brenner",
+    "reverse_designer": "Frank Gasparro"
+   },
+   "files": {
+    "obverse": [
+     "File:2005-Penny-Uncirculated-Obverse-cropped.png"
+    ],
+    "reverse": [
+     "File:2005 Penny Rev Unc D.png"
+    ]
+   },
+   "notes": "1982 cents exist in both bronze (3.11 g) and zinc (2.5 g); weighing tells them apart."
+  },
+  {
+   "id": "cent-lincoln-wheat",
+   "title": "Lincoln cent, Wheat reverse (1909-1958)",
+   "attributes": {
+    "denomination": "1 cent",
+    "composition": "bronze (95% Cu)",
+    "mass_g": 3.11,
+    "diameter_mm": 19.05,
+    "edge": "plain",
+    "years": "1909-1958",
+    "designer": "Victor D. Brenner"
+   },
+   "files": {
+    "obverse": [
+     "File:1909-S VDB Lincoln cent obverse transparent background.png"
+    ],
+    "reverse": [
+     "File:1909 US Penny reverse (cropped).jpg"
+    ]
+   },
+   "notes": "Key dates include 1909-S VDB, 1909-S, 1914-D, 1922 (no D) and 1931-S. 1943 cents are zinc-coated steel."
+  },
+  {
+   "id": "cent-lincoln-1943-steel",
+   "title": "Lincoln cent, 1943 zinc-coated steel",
+   "attributes": {
+    "denomination": "1 cent",
+    "years": "1943",
+    "composition": "zinc-coated steel",
+    "mass_g": 2.7,
+    "diameter_mm": 19.05,
+    "edge": "plain"
+   },
+   "files": {
+    "obverse": [
+     "File:1943 steel cent obverse.JPG"
+    ]
+   },
+   "notes": "Silvery color and attracted to a magnet. A copper-colored 1943 cent is either a rare error or plated; have it authenticated."
+  },
+  {
+   "id": "cent-2009-birth-kentucky",
+   "title": "Lincoln Bicentennial cent: Birth and Early Childhood in Kentucky (2009)",
+   "attributes": {
+    "denomination": "1 cent",
+    "composition": "copper-plated zinc (97.5% Zn, 2.5% Cu)",
+    "mass_g": 2.5,
+    "diameter_mm": 19.05,
+    "edge": "plain",
+    "years": "2009",
+    "program": "Lincoln Bicentennial One Cent Program"
+   },
+   "files": {
+    "reverse": [
+     "File:2009-lincoln-cent-penny-birth-childhood-kentucky-uncirculated-reverse-768x768.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "cent-2009-formative-indiana",
+   "title": "Lincoln Bicentennial cent: Formative Years in Indiana (2009)",
+   "attributes": {
+    "denomination": "1 cent",
+    "composition": "copper-plated zinc (97.5% Zn, 2.5% Cu)",
+    "mass_g": 2.5,
+    "diameter_mm": 19.05,
+    "edge": "plain",
+    "years": "2009",
+    "program": "Lincoln Bicentennial One Cent Program"
+   },
+   "files": {
+    "reverse": [
+     "File:Formative Years in Indiana Reverse.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "cent-indian-head",
+   "title": "Indian Head cent, oak wreath and shield reverse (1860-1909)",
+   "attributes": {
+    "denomination": "1 cent",
+    "composition": "copper-nickel 1860-1864, bronze 1864-1909",
+    "mass_g": 3.11,
+    "diameter_mm": 19.05,
+    "edge": "plain",
+    "years": "1860-1909",
+    "designer": "James B. Longacre"
+   },
+   "files": {
+    "obverse": [
+     "File:NNC-US-1860-1C-Indian Head Cent (wreath & shield) obverse (cropped).jpg"
+    ],
+    "reverse": [
+     "File:NNC-US-1860-1C-Indian Head Cent (wreath & shield) reverse (cropped).jpg"
+    ]
+   },
+   "notes": "Key dates include 1869, 1872, 1877 and 1909-S."
+  },
+  {
+   "id": "nickel-jefferson-2006",
+   "title": "Jefferson nickel, forward-facing portrait (2006-present)",
+   "attributes": {
+    "denomination": "5 cents",
+    "composition": "cupronickel (75% Cu, 25% Ni)",
+    "mass_g": 5.0,
+    "diameter_mm": 21.21,
+    "edge": "plain",
+    "years": "2006-present",
+    "obverse_designer": "Jamie Franki",
+    "reverse_designer": "Felix Schlag"
+   },
+   "files": {
+    "obverse": [
+     "File:Nickel obverse.png"
+    ],
+    "reverse": [
+     "File:US Nickel 2013 Rev.png",
+     "File:2006 Nickel Proof Rev.png"
+    ]
+   },
+   "notes": "The Monticello reverse is also used on 1938-2003 nickels, which have a left-facing profile."
+  },
+  {
+   "id": "nickel-jefferson-1938",
+   "title": "Jefferson nickel, profile portrait (1938-2004)",
+   "attributes": {
+    "denomination": "5 cents",
+    "composition": "cupronickel (75% Cu, 25% Ni)",
+    "mass_g": 5.0,
+    "diameter_mm": 21.21,
+    "edge": "plain",
+    "years": "1938-2004",
+    "designer": "Felix Schlag"
+   },
+   "files": {
+    "obverse": [
+     {
+      "file": "File:NNC-US-1938-5C-Jefferson Nickel.jpg",
+      "crop": "left"
+     }
+    ],
+    "reverse": [
+     {
+      "file": "File:NNC-US-1938-5C-Jefferson Nickel.jpg",
+      "crop": "right"
+     }
+    ]
+   },
+   "notes": "1942-1945 'war nickels' with a large mint mark above Monticello contain 35% silver (0.0563 troy oz)."
+  },
+  {
+   "id": "nickel-2004-peace-medal",
+   "title": "Westward Journey nickel: Peace Medal (2004)",
+   "attributes": {
+    "denomination": "5 cents",
+    "composition": "cupronickel (75% Cu, 25% Ni)",
+    "mass_g": 5.0,
+    "diameter_mm": 21.21,
+    "edge": "plain",
+    "years": "2004",
+    "program": "Westward Journey Nickel Series"
+   },
+   "files": {
+    "reverse": [
+     "File:2004 Peace Medal nickel (reverse).jpg",
+     "File:2004 Nickel LP Reverse.jpg",
+     "File:2004-westward-journey-nickel-series-louisiana-purchase-uncirculated-reverse-768x768.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "nickel-2004-keelboat",
+   "title": "Westward Journey nickel: Keelboat (2004)",
+   "attributes": {
+    "denomination": "5 cents",
+    "composition": "cupronickel (75% Cu, 25% Ni)",
+    "mass_g": 5.0,
+    "diameter_mm": 21.21,
+    "edge": "plain",
+    "years": "2004",
+    "program": "Westward Journey Nickel Series"
+   },
+   "files": {
+    "reverse": [
+     "File:2004-westward-journey-nickel-series-keelboat-uncirculated-reverse-768x768 - Copy.jpg",
+     "File:2004 Keelboat nickel (reverse).jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "nickel-2005-bison",
+   "title": "Westward Journey nickel: American Bison (2005)",
+   "attributes": {
+    "denomination": "5 cents",
+    "composition": "cupronickel (75% Cu, 25% Ni)",
+    "mass_g": 5.0,
+    "diameter_mm": 21.21,
+    "edge": "plain",
+    "years": "2005",
+    "program": "Westward Journey Nickel Series"
+   },
+   "files": {
+    "reverse": [
+     "File:2005-westward-journey-nickel-series-american-bison-uncirculated-reverse-768x768 - Copy.jpg",
+     "File:2005 Nickel Unc Rev Buffalo.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "nickel-2005-ocean-in-view",
+   "title": "Westward Journey nickel: Ocean in View (2005)",
+   "attributes": {
+    "denomination": "5 cents",
+    "composition": "cupronickel (75% Cu, 25% Ni)",
+    "mass_g": 5.0,
+    "diameter_mm": 21.21,
+    "edge": "plain",
+    "years": "2005",
+    "program": "Westward Journey Nickel Series"
+   },
+   "files": {
+    "reverse": [
+     "File:2005-westward-journey-nickel-series-ocean-in-view-o-the-joy-uncirculated-reverse-768x768.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "nickel-buffalo",
+   "title": "Buffalo nickel, Type 2 'line' reverse (1913-1938)",
+   "attributes": {
+    "denomination": "5 cents",
+    "composition": "cupronickel (75% Cu, 25% Ni)",
+    "mass_g": 5.0,
+    "diameter_mm": 21.21,
+    "edge": "plain",
+    "years": "1913-1938",
+    "designer": "James Earle Fraser"
+   },
+   "files": {
+    "obverse": [
+     "File:Buffalo Nickel Obverse.png",
+     "File:NNC-US-1913-5C-Buffalo Nickel (TyI-mound) obverse (cropped).jpg"
+    ],
+    "reverse": [
+     "File:NNC-US-1913-5C-Buffalo Nickel (TyII-line) reverse (cropped).jpg",
+     "File:Buffalo Nickel Reverse.png"
+    ]
+   },
+   "notes": "Dates wear off easily. Key coins include 1913-S Type 2, 1916 doubled die, 1918/7-D, 1921-S, 1926-S and 1937-D three-legged."
+  },
+  {
+   "id": "nickel-buffalo-type1",
+   "title": "Buffalo nickel, Type 1 'mound' reverse (1913)",
+   "attributes": {
+    "denomination": "5 cents",
+    "composition": "cupronickel (75% Cu, 25% Ni)",
+    "mass_g": 5.0,
+    "diameter_mm": 21.21,
+    "edge": "plain",
+    "years": "1913",
+    "designer": "James Earle Fraser"
+   },
+   "files": {
+    "reverse": [
+     "File:NNC-US-1913-5C-Buffalo Nickel (TyI-mound) reverse (cropped).jpg"
+    ]
+   },
+   "notes": "The bison stands on a raised mound; on Type 2 it stands on a flat line with 'FIVE CENTS' recessed below."
+  },
+  {
+   "id": "dime-roosevelt",
+   "title": "Roosevelt dime (1946-present)",
+   "attributes": {
+    "denomination": "10 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 2.268,
+    "diameter_mm": 17.91,
+    "edge": "reeded",
+    "years": "1946-present",
+    "designer": "John R. Sinnock"
+   },
+   "files": {
+    "obverse": [
+     "File:2005 Dime Obv Unc P.png"
+    ],
+    "reverse": [
+     "File:2005 Dime Rev Unc P.png",
+     "File:Dime Reverse 13.png"
+    ]
+   },
+   "notes": "Dimes dated 1964 and earlier are 90% silver (0.0723 troy oz); 1965 and later are copper-nickel clad."
+  },
+  {
+   "id": "dime-mercury",
+   "title": "Winged Liberty Head ('Mercury') dime (1916-1945)",
+   "attributes": {
+    "denomination": "10 cents",
+    "composition": "90% silver, 10% copper",
+    "mass_g": 2.5,
+    "diameter_mm": 17.91,
+    "edge": "reeded",
+    "silver_troy_oz": 0.0723,
+    "years": "1916-1945",
+    "designer": "Adolph A. Weinman"
+   },
+   "files": {
+    "obverse": [
+     "File:1943D Mercury Dime obverse-cutout.png"
+    ],
+    "reverse": [
+     "File:1943D Mercury Dime reverse-cutout.png"
+    ]
+   },
+   "notes": "Key dates include 1916-D, 1921 and 1921-D. Full split bands on the reverse fasces add value."
+  },
+  {
+   "id": "quarter-washington-crossing",
+   "title": "Washington quarter, Crossing the Delaware reverse (2021)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2021",
+    "obverse_designer": "John Flanagan (restored)",
+    "reverse_designer": "Benjamin Sowards"
+   },
+   "files": {
+    "obverse": [
+     "File:2021-P US Quarter Obverse.jpg"
+    ],
+    "reverse": [
+     "File:United States Quarter Reverse 2021.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-state-obverse",
+   "title": "50 State / DC & Territories quarter (obverse, 1999-2009)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "1999-2009",
+    "program": "50 State Quarters / DC and U.S. Territories"
+   },
+   "files": {
+    "obverse": [
+     "File:50 State and Territories quarter obverse (Philadelphia).jpg",
+     "File:50 State and Territories quarter obverse (Denver).jpg"
+    ]
+   },
+   "notes": "Program coins share a Washington obverse; photograph the reverse (tails) side to tell them apart."
+  },
+  {
+   "id": "quarter-atb-obverse",
+   "title": "America the Beautiful quarter (obverse, 2010-2021)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2010-2021",
+    "program": "America the Beautiful Quarters"
+   },
+   "files": {
+    "obverse": [
+     "File:America the Beautiful quarter obverse (Philadeplhia).jpg",
+     "File:2014 ATB Quarter Obv.png"
+    ]
+   },
+   "notes": "Program coins share a Washington obverse; photograph the reverse (tails) side to tell them apart."
+  },
+  {
+   "id": "quarter-women-obverse",
+   "title": "American Women quarter (obverse, 2022-2025)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2022-2025",
+    "program": "American Women Quarters",
+    "obverse_designer": "Laura Gardin Fraser"
+   },
+   "files": {
+    "obverse": [
+     "File:2022 Washington quarter obverse.jpeg"
+    ]
+   },
+   "notes": "Program coins share a Washington obverse; photograph the reverse (tails) side to tell them apart."
+  },
+  {
+   "id": "quarter-bicentennial",
+   "title": "Washington quarter, Bicentennial drummer boy reverse (1776-1976)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "1975-1976 (dated 1776-1976)",
+    "reverse_designer": "Jack L. Ahr"
+   },
+   "files": {
+    "obverse": [
+     "File:1976 United States Bicentennial quarter obverse.jpg"
+    ],
+    "reverse": [
+     "File:1976 Bicentennial Quarter Rev.png"
+    ]
+   },
+   "notes": "Struck in huge numbers; circulated examples are worth face value. 40% silver versions were sold in collector sets (S mint mark)."
+  },
+  {
+   "id": "quarter-standing-liberty",
+   "title": "Standing Liberty quarter (1916-1930)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "90% silver, 10% copper",
+    "mass_g": 6.25,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "silver_troy_oz": 0.1808,
+    "years": "1916-1930",
+    "designer": "Hermon A. MacNeil"
+   },
+   "files": {
+    "obverse": [
+     {
+      "file": "File:Standing Liberty Quarter.jpg",
+      "crop": "left"
+     },
+     "File:SLQ No Date.png"
+    ],
+    "reverse": [
+     {
+      "file": "File:Standing Liberty Quarter.jpg",
+      "crop": "right"
+     },
+     "File:Standing Liberty 1916 reverse.jpg"
+    ]
+   },
+   "notes": "Dates on 1916-1924 coins were raised and often wore away. 1916 and 1918/7-S are key dates."
+  },
+  {
+   "id": "quarter-state-massachusetts",
+   "title": "Massachusetts state quarter (2000)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2000",
+    "program": "50 State Quarters",
+    "state": "Massachusetts"
+   },
+   "files": {
+    "reverse": [
+     "File:Massachusetts quarter reverse side 2000 600px.png"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-state-new-hampshire",
+   "title": "New Hampshire state quarter (2000)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2000",
+    "program": "50 State Quarters",
+    "state": "New Hampshire"
+   },
+   "files": {
+    "reverse": [
+     "File:New Hampshire quarter, reverse side, 2000.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-state-kentucky",
+   "title": "Kentucky state quarter (2001)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2001",
+    "program": "50 State Quarters",
+    "state": "Kentucky"
+   },
+   "files": {
+    "reverse": [
+     "File:Kentucky quarter, reverse side, 2001.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-state-california",
+   "title": "California state quarter (2005)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2005",
+    "program": "50 State Quarters",
+    "state": "California"
+   },
+   "files": {
+    "reverse": [
+     "File:California quarter, reverse side, 2005.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-state-nebraska",
+   "title": "Nebraska state quarter (2006)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2006",
+    "program": "50 State Quarters",
+    "state": "Nebraska"
+   },
+   "files": {
+    "reverse": [
+     "File:2006-50-state-quarters-coin-nebraska-uncirculated-reverse.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-state-utah",
+   "title": "Utah state quarter (2007)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2007",
+    "program": "50 State Quarters",
+    "state": "Utah"
+   },
+   "files": {
+    "reverse": [
+     "File:Utah quarter, reverse side, 2007.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-hot-springs",
+   "title": "America the Beautiful quarter: Hot Springs National Park, Arkansas (2010)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2010",
+    "program": "America the Beautiful Quarters",
+    "state": "Arkansas",
+    "site": "Hot Springs National Park"
+   },
+   "files": {
+    "reverse": [
+     "File:ATBQ 2010 AR HotSprings.jpg",
+     "File:USQuarter2010HotSprings.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-yellowstone",
+   "title": "America the Beautiful quarter: Yellowstone National Park, Wyoming (2010)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2010",
+    "program": "America the Beautiful Quarters",
+    "state": "Wyoming",
+    "site": "Yellowstone National Park"
+   },
+   "files": {
+    "reverse": [
+     "File:ATBQ 2010 WY Yellowstone.jpg",
+     "File:2010-WY Unc.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-yosemite",
+   "title": "America the Beautiful quarter: Yosemite National Park, California (2010)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2010",
+    "program": "America the Beautiful Quarters",
+    "state": "California",
+    "site": "Yosemite National Park"
+   },
+   "files": {
+    "reverse": [
+     "File:ATBQ 2010 CA Yosemite.jpg",
+     "File:2010-CA Unc.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-grand-canyon",
+   "title": "America the Beautiful quarter: Grand Canyon National Park, Arizona (2010)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2010",
+    "program": "America the Beautiful Quarters",
+    "state": "Arizona",
+    "site": "Grand Canyon National Park"
+   },
+   "files": {
+    "reverse": [
+     "File:ATBQ 2010 AZ GrandCanyon.jpg",
+     "File:2010-AZ Unc.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-mount-hood",
+   "title": "America the Beautiful quarter: Mount Hood National Forest, Oregon (2010)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2010",
+    "program": "America the Beautiful Quarters",
+    "state": "Oregon",
+    "site": "Mount Hood National Forest"
+   },
+   "files": {
+    "reverse": [
+     "File:ATBQ 2010 OR MtHood.jpg",
+     "File:2010-OR Unc.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-hawaii-volcanoes",
+   "title": "America the Beautiful quarter: Hawai'i Volcanoes National Park, Hawaii (2012)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2012",
+    "program": "America the Beautiful Quarters",
+    "state": "Hawaii",
+    "site": "Hawai'i Volcanoes National Park"
+   },
+   "files": {
+    "reverse": [
+     "File:2012-ATB-Quarters-Unc-Hawaii.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-white-mountain",
+   "title": "America the Beautiful quarter: White Mountain National Forest, New Hampshire (2013)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2013",
+    "program": "America the Beautiful Quarters",
+    "state": "New Hampshire",
+    "site": "White Mountain National Forest"
+   },
+   "files": {
+    "reverse": [
+     "File:2013-america-the-beautiful-quarters-coin-white-mountain-new-hampshire-uncirculated-reverse.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-fort-mchenry",
+   "title": "America the Beautiful quarter: Fort McHenry National Monument, Maryland (2013)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2013",
+    "program": "America the Beautiful Quarters",
+    "state": "Maryland",
+    "site": "Fort McHenry National Monument"
+   },
+   "files": {
+    "reverse": [
+     "File:Fort McHenry National Historic Monument Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-cumberland-gap",
+   "title": "America the Beautiful quarter: Cumberland Gap National Historical Park, Kentucky (2016)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2016",
+    "program": "America the Beautiful Quarters",
+    "state": "Kentucky",
+    "site": "Cumberland Gap National Historical Park"
+   },
+   "files": {
+    "reverse": [
+     "File:2016-america-the-beautiful-quarters-coin-cumberland-gap-kentucky-uncirculated-reverse.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-harpers-ferry",
+   "title": "America the Beautiful quarter: Harpers Ferry National Historical Park, West Virginia (2016)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2016",
+    "program": "America the Beautiful Quarters",
+    "state": "West Virginia",
+    "site": "Harpers Ferry National Historical Park"
+   },
+   "files": {
+    "reverse": [
+     "File:2016-america-the-beautiful-quarters-coin-harpers-ferry-west-virginia-uncirculated-reverse.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-theodore-roosevelt",
+   "title": "America the Beautiful quarter: Theodore Roosevelt National Park, North Dakota (2016)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2016",
+    "program": "America the Beautiful Quarters",
+    "state": "North Dakota",
+    "site": "Theodore Roosevelt National Park"
+   },
+   "files": {
+    "reverse": [
+     "File:2016-america-the-beautiful-quarters-coin-theodore-roosevelt-north-dakota-uncirculated-reverse.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-fort-moultrie",
+   "title": "America the Beautiful quarter: Fort Moultrie (Fort Sumter National Monument), South Carolina (2016)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2016",
+    "program": "America the Beautiful Quarters",
+    "state": "South Carolina",
+    "site": "Fort Moultrie (Fort Sumter National Monument)"
+   },
+   "files": {
+    "reverse": [
+     "File:2016-america-the-beautiful-quarters-coin-fort-moultrie-south-carolina-uncirculated-reverse.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-atb-tuskegee-airmen",
+   "title": "America the Beautiful quarter: Tuskegee Airmen National Historic Site, Alabama (2021)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "years": "2021",
+    "program": "America the Beautiful Quarters",
+    "state": "Alabama",
+    "site": "Tuskegee Airmen National Historic Site"
+   },
+   "files": {
+    "reverse": [
+     "File:2021 ATB quarter AL.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-maya-angelou",
+   "title": "American Women quarter: Maya Angelou (2022)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Maya Angelou",
+    "years": "2022"
+   },
+   "files": {
+    "reverse": [
+     "File:American Women Quarter 2022 Maya Angelou.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-sally-ride",
+   "title": "American Women quarter: Dr. Sally Ride (2022)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Dr. Sally Ride",
+    "years": "2022"
+   },
+   "files": {
+    "reverse": [
+     "File:2022 Dr. Sally Ride Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-wilma-mankiller",
+   "title": "American Women quarter: Wilma Mankiller (2022)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Wilma Mankiller",
+    "years": "2022"
+   },
+   "files": {
+    "reverse": [
+     "File:2022 Wilma Mankiller Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-nina-otero-warren",
+   "title": "American Women quarter: Nina Otero-Warren (2022)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Nina Otero-Warren",
+    "years": "2022"
+   },
+   "files": {
+    "reverse": [
+     "File:2022 Nina Otero-Warren Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-anna-may-wong",
+   "title": "American Women quarter: Anna May Wong (2022)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Anna May Wong",
+    "years": "2022"
+   },
+   "files": {
+    "reverse": [
+     "File:American Women Quarter 2022 Anna May Wong.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-bessie-coleman",
+   "title": "American Women quarter: Bessie Coleman (2023)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Bessie Coleman",
+    "years": "2023"
+   },
+   "files": {
+    "reverse": [
+     "File:2023 Bessie Coleman Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-edith-kanakaole",
+   "title": "American Women quarter: Edith Kanakaʻole (2023)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Edith Kanakaʻole",
+    "years": "2023"
+   },
+   "files": {
+    "reverse": [
+     "File:2023 Edith Kanakaʻole Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-eleanor-roosevelt",
+   "title": "American Women quarter: Eleanor Roosevelt (2023)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Eleanor Roosevelt",
+    "years": "2023"
+   },
+   "files": {
+    "reverse": [
+     "File:2023 Eleanor Roosevelt Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-jovita-idar",
+   "title": "American Women quarter: Jovita Idar (2023)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Jovita Idar",
+    "years": "2023"
+   },
+   "files": {
+    "reverse": [
+     "File:2023 Jovita Idar Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-maria-tallchief",
+   "title": "American Women quarter: Maria Tallchief (2023)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Maria Tallchief",
+    "years": "2023"
+   },
+   "files": {
+    "reverse": [
+     "File:2023 Maria Tallchief Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-patsy-mink",
+   "title": "American Women quarter: Patsy Takemoto Mink (2024)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Patsy Takemoto Mink",
+    "years": "2024"
+   },
+   "files": {
+    "reverse": [
+     "File:2024 Patsy Takemoto Mink Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-mary-edwards-walker",
+   "title": "American Women quarter: Dr. Mary Edwards Walker (2024)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Dr. Mary Edwards Walker",
+    "years": "2024"
+   },
+   "files": {
+    "reverse": [
+     "File:2024 Mary Edwards Walker Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-pauli-murray",
+   "title": "American Women quarter: Rev. Dr. Pauli Murray (2024)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Rev. Dr. Pauli Murray",
+    "years": "2024"
+   },
+   "files": {
+    "reverse": [
+     "File:2024 Pauli Murray Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-zitkala-sa",
+   "title": "American Women quarter: Zitkala-Ša (2024)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Zitkala-Ša",
+    "years": "2024"
+   },
+   "files": {
+    "reverse": [
+     "File:2024 Zitkala-Sa Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-celia-cruz",
+   "title": "American Women quarter: Celia Cruz (2024)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Celia Cruz",
+    "years": "2024"
+   },
+   "files": {
+    "reverse": [
+     "File:2024 Celia Cruz Womens Quarter.jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-ida-b-wells",
+   "title": "American Women quarter: Ida B. Wells (2025)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Ida B. Wells",
+    "years": "2025"
+   },
+   "files": {
+    "reverse": [
+     "File:Ida B Wells quarter.webp"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-juliette-gordon-low",
+   "title": "American Women quarter: Juliette Gordon Low (2025)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Juliette Gordon Low",
+    "years": "2025"
+   },
+   "files": {
+    "reverse": [
+     "File:Juliette Gordon Low quarter.webp"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-stacey-milbern",
+   "title": "American Women quarter: Stacey Park Milbern (2025)",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Stacey Park Milbern",
+    "years": "2025"
+   },
+   "files": {
+    "reverse": [
+     "File:Stacey Milbern quarter.webp"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "quarter-women-althea-gibson",
+   "title": "American Women quarter: Althea Gibson",
+   "attributes": {
+    "denomination": "25 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 5.67,
+    "diameter_mm": 24.26,
+    "edge": "reeded",
+    "program": "American Women Quarters",
+    "honoree": "Althea Gibson"
+   },
+   "files": {
+    "reverse": [
+     "File:Althea Gibson quarter.webp"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "half-kennedy",
+   "title": "Kennedy half dollar (1964-present)",
+   "attributes": {
+    "denomination": "50 cents",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 11.34,
+    "diameter_mm": 30.61,
+    "edge": "reeded",
+    "years": "1964-present",
+    "obverse_designer": "Gilroy Roberts",
+    "reverse_designer": "Frank Gasparro"
+   },
+   "files": {
+    "obverse": [
+     "File:US Half Dollar Obverse 2015.png",
+     "File:2005 Half Dollar Obv Unc P.png",
+     "File:US 50 Cent Obv.png"
+    ],
+    "reverse": [
+     "File:US 50 Cent Rev.png",
+     "File:2005 Half Dollar Rev Unc P.png"
+    ]
+   },
+   "notes": "1964 halves are 90% silver (0.3617 troy oz); 1965-1970 are 40% silver (0.1479 troy oz); 1971 on are clad."
+  },
+  {
+   "id": "half-walking-liberty",
+   "title": "Walking Liberty half dollar (1916-1947)",
+   "attributes": {
+    "denomination": "50 cents",
+    "composition": "90% silver, 10% copper",
+    "mass_g": 12.5,
+    "diameter_mm": 30.61,
+    "edge": "reeded",
+    "silver_troy_oz": 0.3617,
+    "years": "1916-1947",
+    "designer": "Adolph A. Weinman"
+   },
+   "files": {
+    "obverse": [
+     "File:1916-S 50C (obv).jpg",
+     "File:1916-S 50C (Obverse).jpg"
+    ],
+    "reverse": [
+     "File:1916-S 50C (rev).jpg",
+     "File:1916-S 50C (Reverse).jpg"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "half-franklin",
+   "title": "Franklin half dollar (1948-1963)",
+   "attributes": {
+    "denomination": "50 cents",
+    "composition": "90% silver, 10% copper",
+    "mass_g": 12.5,
+    "diameter_mm": 30.61,
+    "edge": "reeded",
+    "silver_troy_oz": 0.3617,
+    "years": "1948-1963",
+    "designer": "John R. Sinnock"
+   },
+   "files": {
+    "obverse": [
+     "File:1950-D 50C (Full Bell Lines) (obv).jpg"
+    ],
+    "reverse": [
+     "File:1950-D 50C (Full Bell Lines) (rev).jpg"
+    ]
+   },
+   "notes": "'Full Bell Lines' (complete lines across the bottom of the Liberty Bell) command a premium."
+  },
+  {
+   "id": "dollar-sacagawea-eagle",
+   "title": "Sacagawea dollar, soaring eagle reverse (2000-2008)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2000-2008",
+    "edge": "plain",
+    "obverse_designer": "Glenna Goodacre",
+    "reverse_designer": "Thomas D. Rogers Sr."
+   },
+   "files": {
+    "reverse": [
+     "File:2003 Sacagawea Rev.png"
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "id": "dollar-native-american-2009",
+   "title": "Native American dollar: Three Sisters agriculture (2009)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2009",
+    "edge": "lettered",
+    "program": "Native American $1 Coin Program"
+   },
+   "files": {
+    "reverse": [
+     "File:2009NativeAmericanRev.jpg"
+    ]
+   },
+   "notes": "All Native American dollars share the Sacagawea obverse; photograph the reverse to identify the year."
+  },
+  {
+   "id": "dollar-native-american-2018",
+   "title": "Native American dollar: Jim Thorpe (2018)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2018",
+    "edge": "lettered",
+    "program": "Native American $1 Coin Program"
+   },
+   "files": {
+    "reverse": [
+     "File:2018 Native American Dollar Reverse.jpg"
+    ]
+   },
+   "notes": "All Native American dollars share the Sacagawea obverse; photograph the reverse to identify the year."
+  },
+  {
+   "id": "dollar-native-american-2020",
+   "title": "Native American dollar: Elizabeth Peratrovich and Alaska's Anti-Discrimination Law (2020)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2020",
+    "edge": "lettered",
+    "program": "Native American $1 Coin Program"
+   },
+   "files": {
+    "reverse": [
+     "File:2020 Native American Dollar Reverse.jpeg"
+    ]
+   },
+   "notes": "All Native American dollars share the Sacagawea obverse; photograph the reverse to identify the year."
+  },
+  {
+   "id": "dollar-native-american-2023",
+   "title": "Native American dollar: Maria Tallchief and Marjorie Tallchief (2023)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2023",
+    "edge": "lettered",
+    "program": "Native American $1 Coin Program"
+   },
+   "files": {
+    "reverse": [
+     "File:2023 Native American Dollar Reverse.jpg"
+    ]
+   },
+   "notes": "All Native American dollars share the Sacagawea obverse; photograph the reverse to identify the year."
+  },
+  {
+   "id": "dollar-native-american-2024",
+   "title": "Native American dollar: Indian Citizenship Act of 1924 (2024)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2024",
+    "edge": "lettered",
+    "program": "Native American $1 Coin Program"
+   },
+   "files": {
+    "reverse": [
+     "File:2024 Native American Dollar Reverse.jpg"
+    ]
+   },
+   "notes": "All Native American dollars share the Sacagawea obverse; photograph the reverse to identify the year."
+  },
+  {
+   "id": "dollar-presidential-george-washington",
+   "title": "Presidential dollar: George Washington (2007)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2007",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "George Washington"
+   },
+   "files": {
+    "obverse": [
+     "File:George Washington Presidential $1 Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-john-adams",
+   "title": "Presidential dollar: John Adams (2007)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2007",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "John Adams"
+   },
+   "files": {
+    "obverse": [
+     "File:John Adams Presidential $1 Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-thomas-jefferson",
+   "title": "Presidential dollar: Thomas Jefferson (2007)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2007",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "Thomas Jefferson"
+   },
+   "files": {
+    "obverse": [
+     "File:Thomas Jefferson Presidential $1 Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-james-madison",
+   "title": "Presidential dollar: James Madison (2007)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2007",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "James Madison"
+   },
+   "files": {
+    "obverse": [
+     "File:James Madison Presidential $1 Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-james-monroe",
+   "title": "Presidential dollar: James Monroe (2008)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2008",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "James Monroe"
+   },
+   "files": {
+    "obverse": [
+     "File:James Monroe Presidential $1 Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-andrew-jackson",
+   "title": "Presidential dollar: Andrew Jackson (2008)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2008",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "Andrew Jackson"
+   },
+   "files": {
+    "obverse": [
+     "File:Andrew Jackson Presidential $1 Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-john-tyler",
+   "title": "Presidential dollar: John Tyler (2009)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2009",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "John Tyler"
+   },
+   "files": {
+    "obverse": [
+     "File:John Tyler Presidential $1 Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-james-k-polk",
+   "title": "Presidential dollar: James K. Polk (2009)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2009",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "James K. Polk"
+   },
+   "files": {
+    "obverse": [
+     "File:James Polk Presidential $1 Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-zachary-taylor",
+   "title": "Presidential dollar: Zachary Taylor (2009)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2009",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "Zachary Taylor"
+   },
+   "files": {
+    "obverse": [
+     "File:Zachary Taylor Presidential $1 Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-andrew-johnson",
+   "title": "Presidential dollar: Andrew Johnson (2011)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2011",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "Andrew Johnson"
+   },
+   "files": {
+    "obverse": [
+     "File:Andew Johnson $1 Presidential Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-ulysses-s-grant",
+   "title": "Presidential dollar: Ulysses S. Grant (2011)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2011",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "Ulysses S. Grant"
+   },
+   "files": {
+    "obverse": [
+     "File:Ulysses S. Grant $1 Presidential Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-rutherford-b-hayes",
+   "title": "Presidential dollar: Rutherford B. Hayes (2011)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2011",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "Rutherford B. Hayes"
+   },
+   "files": {
+    "obverse": [
+     "File:Rutherford B. Hayes $1 Presidential Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-presidential-james-a-garfield",
+   "title": "Presidential dollar: James A. Garfield (2011)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "manganese brass (88.5% Cu, 6% Zn, 3.5% Mn, 2% Ni)",
+    "mass_g": 8.1,
+    "diameter_mm": 26.49,
+    "years": "2011",
+    "edge": "lettered",
+    "program": "Presidential $1 Coin Program",
+    "president": "James A. Garfield"
+   },
+   "files": {
+    "obverse": [
+     "File:James Garfield $1 Presidential Coin obverse.png"
+    ]
+   },
+   "notes": "Presidential dollars share a Statue of Liberty reverse; the portrait side identifies the coin. A coin missing its edge lettering is a collectible error."
+  },
+  {
+   "id": "dollar-susan-b-anthony",
+   "title": "Susan B. Anthony dollar (1979-1981, 1999)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "copper-nickel clad copper",
+    "mass_g": 8.1,
+    "diameter_mm": 26.5,
+    "edge": "reeded",
+    "years": "1979-1981, 1999",
+    "designer": "Frank Gasparro"
+   },
+   "files": {
+    "obverse": [
+     "File:1999 SBA Obv P.png",
+     "File:1981-S SBA obverse.jpg"
+    ],
+    "reverse": [
+     "File:1999 SBA Rev P.png",
+     "File:US Anthony dollar coin reverse.jpg"
+    ]
+   },
+   "notes": "Often confused with quarters because of its size and reeded edge; the 11-sided inner border is distinctive."
+  },
+  {
+   "id": "dollar-morgan",
+   "title": "Morgan dollar (1878-1904, 1921)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "90% silver, 10% copper",
+    "mass_g": 26.73,
+    "diameter_mm": 38.1,
+    "edge": "reeded",
+    "silver_troy_oz": 0.7734,
+    "years": "1878-1904, 1921",
+    "designer": "George T. Morgan"
+   },
+   "files": {
+    "obverse": [
+     {
+      "file": "File:NNC-US-1878-CC-1$-Morgan dollar.jpg",
+      "crop": "left"
+     }
+    ],
+    "reverse": [
+     {
+      "file": "File:NNC-US-1878-CC-1$-Morgan dollar.jpg",
+      "crop": "right"
+     }
+    ]
+   },
+   "notes": "The mint mark sits below the wreath on the reverse; CC (Carson City) coins usually carry a premium. Key dates include 1889-CC, 1893-S and 1895 (proof only)."
+  },
+  {
+   "id": "dollar-peace",
+   "title": "Peace dollar (1921-1935)",
+   "attributes": {
+    "denomination": "1 dollar",
+    "composition": "90% silver, 10% copper",
+    "mass_g": 26.73,
+    "diameter_mm": 38.1,
+    "edge": "reeded",
+    "silver_troy_oz": 0.7734,
+    "years": "1921-1935",
+    "designer": "Anthony de Francisci"
+   },
+   "files": {
+    "obverse": [
+     {
+      "file": "File:NNC-US-1921-1$-Peace dollar.jpg",
+      "crop": "left"
+     }
+    ],
+    "reverse": [
+     {
+      "file": "File:NNC-US-1921-1$-Peace dollar.jpg",
+      "crop": "right"
+     }
+    ]
+   },
+   "notes": "1921 coins are high relief; 1928 and 1934-S are key dates."
+  }
+ ]
+}

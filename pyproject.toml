@@ -1,0 +1,33 @@
+[project]
+name = "curio"
+version = "0.1.0"
+description = "Free, local, open-source identifier for coins, stamps and other collectibles, with explainable price estimates."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=1.24",
+  "pillow>=10.0",
+]
+
+[project.optional-dependencies]
+# Neural embedders (SigLIP / DINOv2). Without these, only the built-in "simple" embedder works.
+ml = ["torch>=2.1", "transformers>=4.45", "sentencepiece", "protobuf"]
+# Local web UI
+web = ["fastapi>=0.110", "uvicorn>=0.27", "python-multipart>=0.0.9"]
+# Faster search for very large catalogs (optional; numpy brute force is used otherwise)
+faiss = ["faiss-cpu>=1.8"]
+dev = ["pytest>=8", "httpx>=0.27"]
+
+[project.scripts]
+curio = "curio.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["curio*"]
+
+[tool.setuptools.package-data]
+curio = ["static/*"]
