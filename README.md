@@ -2,8 +2,9 @@
 
 Identify coins, stamps and other collectibles locally, with reference photos you can compare.
 
-<!-- TODO: Record the real app using media/GIF_SHOTLIST.md and drop the file at media/demo.gif. -->
 ![Curio demo](media/demo.gif)
+
+<sub>Actual DINOv2 inference on an in-catalog reference example, not a held-out accuracy test. [Recording details](media/DEMO.md).</sub>
 
 [![Download for Windows](https://img.shields.io/badge/Download_for_Windows-download-238636)](https://github.com/DylanMartinLSC/curio/releases/latest/download/curio-windows.zip)
 
