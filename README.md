@@ -1,5 +1,18 @@
 # Curio
 
+Identify coins, stamps and other collectibles locally, with reference photos you can compare.
+
+![Curio demo](media/demo.gif)
+
+<sub>Actual DINOv2 inference on an in-catalog reference example, not a held-out accuracy test. [Recording details](media/DEMO.md).</sub>
+
+[![Download for Windows](https://img.shields.io/badge/Download_for_Windows-download-238636)](https://github.com/DylanMartinLSC/curio/releases/latest/download/curio-windows.zip)
+
+Windows builds are unsigned: if SmartScreen appears, choose **More info → Run anyway**.
+
+Extract the whole ZIP and run Curio.exe. Keep its console open; it starts the local browser UI. CPU ML dependencies and the US coin pack are included; model weights download on first identification.
+
+
 A free, local, open-source identifier for coins, stamps and other collectibles: an alternative to subscription identifier apps.
 
 - **Local.** Photos are processed on your own machine. There's no account, no subscription and no telemetry.
